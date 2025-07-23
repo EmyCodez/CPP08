@@ -1,7 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <list>
-#include "easyfind.hpp"
+# include <iostream>
+# include <vector>
+# include <list>
+# include <iterator>
+# include "easyfind.hpp"
 
 int main() {
     std::vector<int> vec;
@@ -16,15 +17,16 @@ int main() {
 
     try {
         std::vector<int>::iterator itVec = easyfind(vec, 2);
-        std::cout << "Found in vector: " << *itVec << std::endl;
+        std::cout << "Found in vector: " << *itVec 
+                  << " at position " << std::distance(vec.begin(), itVec) << std::endl;
 
         std::list<int>::iterator itLst = easyfind(lst, 30);
-        std::cout << "Found in list: " << *itLst << std::endl;
-
+        std::cout << "Found in list: " << *itLst 
+                  << " at position " << std::distance(lst.begin(), itLst) << std::endl;
+                     
         easyfind(vec, 42);
     } catch (const std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
-
     return 0;
 }
