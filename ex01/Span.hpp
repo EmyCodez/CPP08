@@ -2,41 +2,30 @@
 #define SPAN_HPP
 
 #include <vector>
-#include <algorithm>
-#include <exception>
-#include <iterator>
-#include <limits>
+#include <stdexcept>
 
 class Span {
 private:
-    unsigned int _capacity;
+    unsigned int _maxSize;
     std::vector<int> _numbers;
+    Span(); 
 
 public:
-    // Constructor
-    Span(unsigned int N);
-
-    // Destructor
-    ~Span();
-
-    // Copy constructor and assignment
+    Span(unsigned int n);
     Span(const Span& other);
     Span& operator=(const Span& other);
+    ~Span();
 
-    // Add a single number
     void addNumber(int num);
-
-    // Add a range of numbers
-    template<typename Iterator>
-    void addNumber(Iterator begin, Iterator end) {
-        if (static_cast<unsigned int>(std::distance(begin, end)) + _numbers.size() > _capacity)
-            throw std::out_of_range("Adding this range would exceed span capacity");
-        _numbers.insert(_numbers.end(), begin, end);
-    }
-
-    // Span computations
     int shortestSpan() const;
     int longestSpan() const;
+
+    template<typename InputIterator>
+    void addRange(InputIterator begin, InputIterator end) {
+        if (static_cast<unsigned int>(_numbers.size() + std::distance(begin, end)) > _maxSize)
+            throw std::overflow_error("Too many numbers to add to Span.");
+        _numbers.insert(_numbers.end(), begin, end);
+    }
 };
 
-#endif // SPAN_HPP
+#endif
