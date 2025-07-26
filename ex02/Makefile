@@ -1,7 +1,7 @@
-NAME = span
+NAME = mutant
 
-SRC = main.cpp Span.cpp
-DEP = Span.hpp
+SRC = main.cpp 
+DEP = MutantStack.hpp
 
 CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror

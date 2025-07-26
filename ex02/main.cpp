@@ -1,33 +1,59 @@
 #include <iostream>
+#include <string>
 #include "MutantStack.hpp"
 
 int main()
 {
-    MutantStack<int> mstack;
-    mstack.push(5);
-    mstack.push(17);
-    std::cout << mstack.top() << std::endl;
-    mstack.pop();
-    std::cout << mstack.size() << std::endl;
+    // === Test Case 1: int with iterator ===
+    std::cout << "=== Test Case 1: int with iterator ===" << std::endl;
+    MutantStack<int> intStack;
+    intStack.push(10);
+    intStack.push(20);
+    intStack.push(30);
 
-    mstack.push(3);
-    mstack.push(5);
-    mstack.push(737);
-    mstack.push(0);
+    MutantStack<int>::iterator it = intStack.begin();
+    MutantStack<int>::iterator ite = intStack.end();
 
-    MutantStack<int>::iterator it = mstack.begin();
-    MutantStack<int>::iterator ite = mstack.end();
-
-    ++it;
-    --it;
-
+    std::cout << "Elements in intStack:" << std::endl;
     while (it != ite)
     {
         std::cout << *it << std::endl;
         ++it;
     }
 
-    std::stack<int> s(mstack);
+    // === Test Case 2: float with const_iterator ===
+    std::cout << "\n=== Test Case 2: float with const_iterator ===" << std::endl;
+    MutantStack<float> floatStack;
+    floatStack.push(1.1f);
+    floatStack.push(2.2f);
+    floatStack.push(3.3f);
+
+    MutantStack<float>::const_iterator cit = floatStack.begin();
+    MutantStack<float>::const_iterator cite = floatStack.end();
+
+    std::cout << "Elements in floatStack:" << std::endl;
+    while (cit != cite)
+    {
+        std::cout << *cit << std::endl;
+        ++cit;
+    }
+
+    // === Test Case 3: string with reverse_iterator ===
+    std::cout << "\n=== Test Case 3: string with reverse_iterator ===" << std::endl;
+    MutantStack<std::string> stringStack;
+    stringStack.push("one");
+    stringStack.push("two");
+    stringStack.push("three");
+
+    MutantStack<std::string>::reverse_iterator rit = stringStack.rbegin();
+    MutantStack<std::string>::reverse_iterator rite = stringStack.rend();
+
+    std::cout << "Elements in stringStack (reversed):" << std::endl;
+    while (rit != rite)
+    {
+        std::cout << *rit << std::endl;
+        ++rit;
+    }
 
     return 0;
 }
